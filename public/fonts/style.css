@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'NeueKonstantGrotesk';
+    src: url('/fonts/NeueKonstantGrotesk-Book.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Konstant Grotesk';
+    src: url('/fonts/NeueKonstantGrotesk-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}

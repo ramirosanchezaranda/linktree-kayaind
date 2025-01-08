@@ -1,0 +1,58 @@
+---
+---
+
+<div class="flex flex-col items-center space-y-4 relative">
+  <div class="relative animate-float">
+    <div class="w-32 h-32 rounded-full overflow-hidden bg-gradient-to-r from-white/80 to-white/20 p-1 shadow-[0_0_15px_rgba(255,0,0,0.3)]">
+      <img
+        src="/kaya-ind-favicon.svg"
+        alt="Profile"
+        class="w-full h-full object-cover rounded-full"
+      />
+    </div>
+    <div class="absolute -bottom-2 -right-2 bg-red w-6 h-6 rounded-full border-4 border-light dark:border-dark animate-pulse shadow-[0_0_10px_rgba(255,0,0,0.5)]"></div>
+  </div>
+  
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-red hover:text-red/80 transition-colors duration-300 animate-title">
+      Kaya Indumentaria
+    </h1>
+    <p class="text-xl mt-4 text-dark dark:text-light opacity-80 hover:opacity-100 transition-opacity duration-300">
+      Vanguardia en estilo
+    </p>
+  </div>
+</div>
+
+<style>
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+      filter: drop-shadow(0 5px 15px rgba(255, 0, 0, 0.2));
+    }
+    50% {
+      transform: translateY(-10px);
+      filter: drop-shadow(0 15px 15px rgba(255, 0, 0, 0.4));
+    }
+  }
+
+  .animate-title {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.2),
+                   0 0 10px rgba(255, 0, 0, 0.2),
+                   0 0 15px rgba(255, 0, 0, 0.2);
+    }
+    to {
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.4),
+                   0 0 20px rgba(255, 0, 0, 0.4),
+                   0 0 30px rgba(255, 0, 0, 0.4);
+    }
+  }
+</style>

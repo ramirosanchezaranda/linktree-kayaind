@@ -1,0 +1,54 @@
+---
+---
+
+<div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-dark transition-opacity duration-500">
+  <div class="flex flex-col items-center">
+    <div class="text-3xl font-bold loading-text mb-1">KAYA</div>
+    <div class="text-xl loading-text tracking-wider">INDUMENTARIA</div>
+  </div>
+</div>
+
+<style>
+  .loading-text {
+    background: linear-gradient(
+      90deg,
+      rgba(244, 244, 244, 0.2) 0%,
+      rgba(244, 244, 244, 1) 50%,
+      rgba(244, 244, 244, 0.2) 100%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shine 2s linear infinite;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  .loader-fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+  }
+</style>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('loader-fade-out');
+        setTimeout(() => {
+          loader.remove();
+        }, 500);
+      }
+    }, 1000);
+  });
+</script>

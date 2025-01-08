@@ -1,0 +1,71 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import Loader from '../components/Loader.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/fonts/style.css" />
+    <title>{title}</title>
+    <style>
+      @font-face {
+        font-family: 'NeueKonstantGrotesk';
+        src: url('/fonts/NeueKonstantGrotesk-Book.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body class="font-konstant antialiased bg-light dark:bg-dark text-dark dark:text-light transition-colors duration-300">
+    <Loader />
+    <ThemeToggle />
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --accent-light: #f4f4f4;
+    --accent-dark: #181517;
+    --accent-red: #ff0000;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .glass-effect {
+    background: rgba(244, 244, 244, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(244, 244, 244, 0.1);
+  }
+
+  .dark .glass-effect {
+    background: rgba(24, 21, 23, 0.1);
+    border: 1px solid rgba(244, 244, 244, 0.05);
+  }
+</style>

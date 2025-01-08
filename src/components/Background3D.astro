@@ -1,0 +1,93 @@
+---
+---
+
+<div id="background-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></div>
+
+<script>
+  import * as THREE from 'three';
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById('background-canvas').appendChild(renderer.domElement);
+
+  // Crear grid de cubos
+  const cubes = [];
+  const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+  const cubeMaterial = new THREE.MeshPhongMaterial({
+    color: 0xff0000,
+    specular: 0xff3333,
+    shininess: 100,
+    transparent: true,
+    opacity: 0.5,
+    emissive: 0xff0000,
+    emissiveIntensity: 0.2,
+  });
+
+  for (let i = 0; i < 50; i++) {
+    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial.clone());
+    cube.material.opacity = Math.random() * 0.3 + 0.2; // Opacidad variable
+    cube.position.x = Math.random() * 40 - 20;
+    cube.position.y = Math.random() * 40 - 20;
+    cube.position.z = Math.random() * 40 - 20;
+    cube.rotation.x = Math.random() * Math.PI;
+    cube.rotation.y = Math.random() * Math.PI;
+    cube.scale.set(
+      Math.random() * 2 + 0.5,
+      Math.random() * 2 + 0.5,
+      Math.random() * 2 + 0.5
+    );
+    cubes.push(cube);
+    scene.add(cube);
+  }
+
+  // Añadir luces
+  const ambientLight = new THREE.AmbientLight(0xff0000, 0.2);
+  scene.add(ambientLight);
+
+  const pointLight = new THREE.PointLight(0xff0000, 1);
+  pointLight.position.set(10, 10, 10);
+  scene.add(pointLight);
+
+  // Añadir luz pulsante
+  const pulsingLight = new THREE.PointLight(0xff3333, 1);
+  pulsingLight.position.set(-10, -10, -10);
+  scene.add(pulsingLight);
+
+  camera.position.z = 15;
+
+  // Animación
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Animación pulsante de la luz
+    const time = Date.now() * 0.001;
+    pulsingLight.intensity = 1 + Math.sin(time * 2) * 0.5;
+
+    cubes.forEach((cube, i) => {
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      // Movimiento ondulante personalizado
+      cube.position.y += Math.sin(Date.now() * 0.001 + i) * 0.01;
+      cube.position.x += Math.cos(Date.now() * 0.001 + i) * 0.005;
+      // Efecto de "respiración" en la escala
+      const scale = 1 + Math.sin(Date.now() * 0.001 + i) * 0.1;
+      cube.scale.setScalar(scale);
+      // Opacidad pulsante
+      cube.material.opacity = (Math.sin(Date.now() * 0.001 + i) * 0.1 + 0.3);
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  // Responsive
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  animate();
+</script>
